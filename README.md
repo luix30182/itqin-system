@@ -1,4 +1,4 @@
-# itqin-sistem
+# itqin-system
 
 ## Project setup
 ```
