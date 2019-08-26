@@ -5,16 +5,13 @@
 </template>
 
 <script>
-import NavBar from "../components/layout/NavBar";
-
+import NavBar from "../../components/layout/NavBar";
 export default {
   components: {
     NavBar
   },
   data() {
-    return {
-      nombre: "Mario"
-    };
+    return {};
   }
 };
 </script>
