@@ -3,7 +3,7 @@
     <NavBar />
     <v-container class="formHolder">
       <v-row wrap>
-        <v-card class="ma-auto pa-6" min-width="800">
+        <v-card class="ma-auto pa-6">
           <v-card-title>Ingresa tus datos</v-card-title>
           <v-form>
             <v-container>
@@ -32,7 +32,7 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" md="2">
+                <v-col cols="12" md="3">
                   <v-btn outlined color="primary">Ingresar</v-btn>
                 </v-col>
               </v-row>

@@ -1,8 +1,85 @@
 <template>
   <v-app>
     <NavBar />
+    <v-container class="formHolder">
+      <v-row wrap class="px-10">
+        <v-card class="my-auto">
+          <v-card-title>Ingresa tus datos</v-card-title>
+          <v-form>
+            <v-container>
+              <v-row wrap justify="end">
+                <v-col cols="12" sm="12" md="4">
+                  <v-text-field label="Nombre(s)" outlined></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Apellido Paterno" outlined></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field label="Apellid Materno" outlined></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="4">
+                  <v-text-field label="Número de control" outlined></v-text-field>
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="4">
+                  <v-select v-model="carrera" :items="carreras" label="Carrera" outlined></v-select>
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="4">
+                  <v-select v-model="semestre" :items="semestres" label="semestre" outlined></v-select>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    outlined
+                    v-model="email"
+                    :rules="emailRules"
+                    label="E-mail"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="password"
+                    :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="Password"
+                    hint="Almenos 8 caracteres son requeridos"
+                    counter
+                    outlined
+                    @click:append="show1 = !show1"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="passwordConfirm"
+                    :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="Confirmar Password"
+                    hint="Almenos 8 caracteres son requeridos"
+                    counter
+                    outlined
+                    @click:append="show1 = !show1"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="2" lg="2">
+                  <v-btn block outlined color="primary">Registrar</v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
+        </v-card>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
+
+<style scoped>
+.formHolder > .row {
+  height: 90vh;
+}
+</style>
 
 <script>
 import NavBar from "../../components/layout/NavBar";
@@ -11,7 +88,32 @@ export default {
     NavBar
   },
   data() {
-    return {};
+    return {
+      show1: false,
+      password: "",
+      passwordConfirm: "",
+      carrera: "Selecciona una carrera",
+      semestre: null,
+      rules: {
+        required: value => !!value || "Required.",
+        min: v => v.length >= 8 || "Min 8 characters",
+        emailMatch: () => "The email and password you entered don't match"
+      },
+      email: "",
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+/.test(v) || "E-mail must be valid"
+      ],
+      carreras: [
+        "Ing. Sistemas computacionales",
+        "Ing. Materiales",
+        "Ing. Mecanica",
+        "Ing. Industrial",
+        "Ing. Logistica",
+        "Ing. Gestion empresarial"
+      ],
+      semestres: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    };
   }
 };
 </script>

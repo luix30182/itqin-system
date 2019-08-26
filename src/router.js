@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import SignIn from './views/auth/SignIn';
 import SignUp from './views/auth/SignUp';
+import User from './views/User';
 
 Vue.use(Router);
 
@@ -24,6 +25,12 @@ export default new Router({
 			path: '/registro',
 			name: 'signup',
 			component: SignUp
+		},
+		{
+			path: '/user/:id',
+			name: 'user',
+			component: User,
+			props: true
 		}
 	]
 });
