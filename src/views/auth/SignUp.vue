@@ -4,21 +4,23 @@
     <v-container class="formHolder">
       <v-row wrap class="px-10">
         <v-card class="my-auto">
+          <v-alert v-if="registroCorrecto" type="success">Uusario creado exitosamente</v-alert>
+          <v-alert v-if="verificaDatos" type="warning">uh Verifica tus datos</v-alert>
           <v-card-title>Ingresa tus datos</v-card-title>
-          <v-form>
+          <v-form ref="form">
             <v-container>
               <v-row wrap justify="end">
                 <v-col cols="12" sm="12" md="4">
-                  <v-text-field label="Nombre(s)" outlined></v-text-field>
+                  <v-text-field v-model="nombre" label="Nombre(s)" outlined></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Apellido Paterno" outlined></v-text-field>
+                  <v-text-field v-model="apellidoP" label="Apellido Paterno" outlined></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field label="Apellid Materno" outlined></v-text-field>
+                  <v-text-field v-model="apellidoM" label="Apellid Materno" outlined></v-text-field>
                 </v-col>
                 <v-col cols="12" sm="4">
-                  <v-text-field label="Número de control" outlined></v-text-field>
+                  <v-text-field v-model="ncontrol" label="Número de control" outlined></v-text-field>
                 </v-col>
                 <v-col class="d-flex" cols="12" sm="4">
                   <v-select v-model="carrera" :items="carreras" label="Carrera" outlined></v-select>
@@ -64,7 +66,7 @@
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12" md="2" lg="2">
-                  <v-btn block outlined color="primary">Registrar</v-btn>
+                  <v-btn @click="signUp" block outlined color="primary">Registrar</v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -83,12 +85,22 @@
 
 <script>
 import NavBar from "../../components/layout/NavBar";
+import firebase, { firestore } from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import db from "../../firebaseInit";
+import router from "vue-router";
+
 export default {
   components: {
     NavBar
   },
   data() {
     return {
+      nombre: null,
+      apellidoP: null,
+      apellidoM: null,
+      ncontrol: null,
       show1: false,
       password: "",
       passwordConfirm: "",
@@ -96,7 +108,7 @@ export default {
       semestre: null,
       rules: {
         required: value => !!value || "Required.",
-        min: v => v.length >= 8 || "Min 8 characters",
+        min: v => (v && v.length) >= 8 || "Min 8 characters",
         emailMatch: () => "The email and password you entered don't match"
       },
       email: "",
@@ -112,8 +124,67 @@ export default {
         "Ing. Logistica",
         "Ing. Gestion empresarial"
       ],
-      semestres: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      semestres: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      registroCorrecto: false,
+      verificaDatos: false
     };
+  },
+  methods: {
+    signUp: function() {
+      if (
+        (this.nombre,
+        this.apellidoP,
+        this.apellidoM,
+        this.ncontrol,
+        this.password === this.passwordConfirm &&
+          this.email &&
+          this.carrera &&
+          this.semestre)
+      ) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+          .then(user => {
+            db.collection("users")
+              .doc(user.user.uid)
+              .set({
+                nombre: this.nombre,
+                apellidoP: this.apellidoP,
+                apellidoM: this.apellidoM,
+                ncontrol: this.ncontrol,
+                password: this.password,
+                email: this.email,
+                carrera: this.carrera,
+                semestre: this.semestre,
+                rol: "alumno"
+              })
+              .then(res => {
+                this.$refs.form.reset();
+                this.registroCorrecto = !this.registroCorrecto;
+                setTimeout(() => {
+                  this.registroCorrecto = !this.registroCorrecto;
+                  router.push({ name: "user" });
+                }, 3000);
+              })
+              .catch(err => {
+                console.log(err);
+              });
+          })
+          .catch(err => {
+            console.log(err);
+            this.verificaDatos = !this.verificaDatos;
+            setTimeout(() => {
+              this.verificaDatos = !this.verificaDatos;
+            }, 3000);
+          });
+      } else {
+        console.log("verifica tus datos");
+        this.verificaDatos = !this.verificaDatos;
+        setTimeout(() => {
+          this.verificaDatos = !this.verificaDatos;
+        }, 3000);
+      }
+    }
   }
 };
 </script>

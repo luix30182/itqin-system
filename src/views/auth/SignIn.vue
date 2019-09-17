@@ -4,6 +4,7 @@
     <v-container class="formHolder">
       <v-row wrap>
         <v-card class="ma-auto pa-6">
+          <v-alert v-if="verificaDatos" type="warning">uh Verifica tus datos</v-alert>
           <v-card-title>Ingresa tus datos</v-card-title>
           <v-form>
             <v-container>
@@ -33,7 +34,7 @@
                 </v-col>
 
                 <v-col cols="12" md="3">
-                  <v-btn outlined color="primary">Ingresar</v-btn>
+                  <v-btn @click="signIn" block outlined color="primary">Ingresar</v-btn>
                 </v-col>
               </v-row>
             </v-container>
@@ -51,7 +52,10 @@
 </style>
 
 <script>
+import firebase from "firebase/app";
+import "firebase/auth";
 import NavBar from "../../components/layout/NavBar";
+
 export default {
   components: {
     NavBar
@@ -62,15 +66,40 @@ export default {
       password: "",
       rules: {
         required: value => !!value || "Required.",
-        min: v => v.length >= 8 || "Min 8 characters",
+        min: v => (v && v.length) >= 8 || "Min 8 characters",
         emailMatch: () => "The email and password you entered don't match"
       },
       email: "",
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
-      ]
+      ],
+      verificaDatos: false
     };
+  },
+  methods: {
+    signIn: function() {
+      if (this.password && this.email) {
+        try {
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(this.email, this.password)
+            .then(user => {
+              this.$router.push({
+                name: "user",
+                params: { id: this.email.split("@")[0], user: user }
+              });
+            });
+        } catch (e) {
+          console.log(e);
+        }
+      } else {
+        this.verificaDatos = !this.verificaDatos;
+        setTimeout(() => {
+          this.verificaDatos = !this.verificaDatos;
+        }, 3000);
+      }
+    }
   }
 };
 </script>
