@@ -11,6 +11,7 @@
     "core-js": "^2.6.5",
     "firebase": "^6.5.0",
     "material-design-icons": "^3.0.1",
+    "moment": "^2.24.0",
     "vue": "^2.6.10",
     "vue-firestore": "^0.3.22",
     "vue-router": "^3.0.3",

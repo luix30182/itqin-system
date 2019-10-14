@@ -152,7 +152,6 @@ export default {
                 apellidoP: this.apellidoP,
                 apellidoM: this.apellidoM,
                 ncontrol: this.ncontrol,
-                password: this.password,
                 email: this.email,
                 carrera: this.carrera,
                 semestre: this.semestre,

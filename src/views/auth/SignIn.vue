@@ -91,7 +91,11 @@ export default {
               });
             });
         } catch (e) {
-          console.log(e);
+        } finally {
+          this.verificaDatos = !this.verificaDatos;
+          setTimeout(() => {
+            this.verificaDatos = !this.verificaDatos;
+          }, 3000);
         }
       } else {
         this.verificaDatos = !this.verificaDatos;

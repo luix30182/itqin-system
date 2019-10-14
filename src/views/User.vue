@@ -61,22 +61,32 @@ export default {
   },
   beforeMount() {
     const uid = this.user.user.uid;
+    console.log(uid);
     db.collection("users")
       .doc(uid)
       .get()
       .then(doc => {
         if (!doc.exists) {
           console.log("No user foud");
+          this.$router.push({
+            name: "home"
+          });
         } else {
-          console.log(doc.data());
-          this.nombre = doc.data().nombre;
-          this.apellidoP = doc.data().apellidoP;
-          this.apellidoM = doc.data().apellidoM;
-          this.ncontrol = doc.data().ncontrol;
-          this.password = doc.data().password;
-          this.email = doc.data().email;
-          this.carrera = doc.data().carrera;
-          this.semestre = doc.data().semestre;
+          if (doc.data().rol === "alumno") {
+            this.nombre = doc.data().nombre;
+            this.apellidoP = doc.data().apellidoP;
+            this.apellidoM = doc.data().apellidoM;
+            this.ncontrol = doc.data().ncontrol;
+            this.password = doc.data().password;
+            this.email = doc.data().email;
+            this.carrera = doc.data().carrera;
+            this.semestre = doc.data().semestre;
+          } else {
+            this.$router.push({
+              name: "admin",
+              params: { user: doc.data() }
+            });
+          }
         }
       })
       .catch(err => {

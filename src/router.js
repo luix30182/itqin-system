@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import SignIn from './views/auth/SignIn';
 import SignUp from './views/auth/SignUp';
 import User from './views/User';
+import Admin from './views/Admin';
 
 Vue.use(Router);
 
@@ -30,6 +31,12 @@ export default new Router({
 			path: '/user/:id',
 			name: 'user',
 			component: User,
+			props: true
+		},
+		{
+			path: '/admin/:id',
+			name: 'admin',
+			component: Admin,
 			props: true
 		}
 	]
