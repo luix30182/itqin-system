@@ -57,6 +57,27 @@
                   </tbody>
                 </template>
               </v-simple-table>
+              <h2 color="black">Acciones</h2>
+              <v-simple-table>
+                <template v-slot:default>
+                  <thead>
+                    <tr>
+                      <th class="text-left">Activar a todos</th>
+                      <th class="text-left">Desactivar a todos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <v-btn @click="activarAll" block color="success" dark>Activar</v-btn>
+                      </td>
+                      <td>
+                        <v-btn @click="desactivarAll" block color="error" dark>Desactivar</v-btn>
+                      </td>
+                    </tr>
+                  </tbody>
+                </template>
+              </v-simple-table>
             </v-card-text>
           </v-card>
         </v-col>
@@ -74,6 +95,7 @@
                     <h5>{{student.semestre}}° semestre</h5>
                     <h5>Número de control: {{student.ncontrol}}</h5>
                     <h5>Email: {{student.email}}</h5>
+                    <h5>Status: {{student.activo ? 'Permitido': 'No permitido'}}</h5>
                     <h5>Qr de acceso</h5>
                   </v-col>
                   <v-col cols="12" md="2" class="d-flex justify-center">
@@ -91,6 +113,21 @@
                       max-width="100"
                       max-height="100"
                     ></v-img>
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                      @click="desactivarAccess(student.ncontrol)"
+                      block
+                      color="warning"
+                      dark
+                    >Remover Acceso</v-btn>
+                    <v-btn
+                      @click="activarAccess(student.ncontrol)"
+                      block
+                      color="warning"
+                      dark
+                      class="mt-4"
+                    >Habilitar Acceso</v-btn>
                   </v-col>
                 </v-row>
               </v-expansion-panel-content>
@@ -139,9 +176,89 @@ export default {
     };
   },
   methods: {
+    resetStudents: function() {
+      this.students = [];
+      db.collection("users")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            if (doc.data().rol != "admin") {
+              this.students.push(doc.data());
+            }
+          });
+        });
+    },
     formatDate: function(f) {
       //1566190800
       return moment.unix(f).format("MMM Do YY");
+    },
+    activarAll: function() {
+      db.collection("users")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            if (doc.data().rol != "admin") {
+              const alumnoRef = db.collection("users").doc(doc.id);
+              alumnoRef.update({
+                activo: true
+              });
+            }
+          });
+        })
+        .finally(e => {
+          this.resetStudents();
+        });
+    },
+    desactivarAll: function() {
+      db.collection("users")
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            if (doc.data().rol != "admin") {
+              const alumnoRef = db.collection("users").doc(doc.id);
+              alumnoRef.update({
+                activo: false
+              });
+            }
+          });
+        })
+        .finally(e => {
+          this.resetStudents();
+        });
+    },
+    activarAccess: function(ncontrol) {
+      const s = db
+        .collection("users")
+        .where("ncontrol", "==", ncontrol)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            const userRef = db.collection("users").doc(doc.id);
+            userRef.update({
+              activo: true
+            });
+          });
+        })
+        .finally(e => {
+          this.resetStudents();
+        });
+    },
+    desactivarAccess: function(ncontrol) {
+      const s = db
+        .collection("users")
+        .where("ncontrol", "==", ncontrol)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            const userRef = db.collection("users").doc(doc.id);
+            userRef.update({
+              activo: false
+            });
+          });
+        })
+        .finally(e => {
+          this.resetStudents();
+        });
     }
   },
   props: {

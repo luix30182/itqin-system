@@ -47,7 +47,7 @@
 
 <style scoped>
 .formHolder > .row {
-  height: 90vh;
+  height: 80vh;
 }
 </style>
 
