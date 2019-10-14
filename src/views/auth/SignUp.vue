@@ -3,65 +3,74 @@
     <NavBar />
     <v-container>
       <v-row wrap>
-        <v-alert v-if="registroCorrecto" type="success">Usario creado exitosamente</v-alert>
-        <v-alert v-if="verificaDatos" type="warning">uh Verifica tus datos</v-alert>
-        <v-card-title>Ingresa tus datos</v-card-title>
         <v-form ref="form">
           <v-container>
-            <v-row wrap justify="end">
-              <v-col cols="12" sm="12" md="4">
-                <v-text-field v-model="nombre" label="Nombre(s)" outlined></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field v-model="apellidoP" label="Apellido Paterno" outlined></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field v-model="apellidoM" label="Apellido Materno" outlined></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="4">
-                <v-text-field v-model="ncontrol" label="Número de control" outlined></v-text-field>
-              </v-col>
-              <v-col class="d-flex" cols="12" sm="4">
-                <v-select v-model="carrera" :items="carreras" label="Carrera" outlined></v-select>
-              </v-col>
-              <v-col class="d-flex" cols="12" sm="4">
-                <v-select v-model="semestre" :items="semestres" label="semestre" outlined></v-select>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field outlined v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="password"
-                  :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                  :rules="[rules.required, rules.min]"
-                  :type="show1 ? 'text' : 'password'"
-                  name="input-10-1"
-                  label="Password"
-                  hint="Almenos 8 caracteres son requeridos"
-                  counter
-                  outlined
-                  @click:append="show1 = !show1"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" md="4">
-                <v-text-field
-                  v-model="passwordConfirm"
-                  :append-icon="show1 ? 'visibility' : 'visibility_off'"
-                  :rules="[rules.required, rules.min]"
-                  :type="show1 ? 'text' : 'password'"
-                  name="input-10-1"
-                  label="Confirmar Password"
-                  hint="Almenos 8 caracteres son requeridos"
-                  counter
-                  outlined
-                  @click:append="show1 = !show1"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" md="2" lg="2">
-                <v-btn @click="signUp" block outlined color="primary">Registrar</v-btn>
-              </v-col>
-            </v-row>
+            <v-col cols="12" md="6" offset-md="3">
+              <v-card-title>Ingresa tus datos</v-card-title>
+
+              <v-alert v-if="registroCorrecto" type="success">Usario creado exitosamente</v-alert>
+              <v-alert v-if="verificaDatos" type="warning">uh Verifica tus datos</v-alert>
+              <v-row wrap justify="end">
+                <v-col cols="12" sm="12" md="4">
+                  <v-text-field v-model="nombre" label="Nombre(s)" outlined></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field v-model="apellidoP" label="Apellido Paterno" outlined></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field v-model="apellidoM" label="Apellido Materno" outlined></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="4">
+                  <v-text-field v-model="ncontrol" label="Número de control" outlined></v-text-field>
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="4">
+                  <v-select v-model="carrera" :items="carreras" label="Carrera" outlined></v-select>
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="4">
+                  <v-select v-model="semestre" :items="semestres" label="semestre" outlined></v-select>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    outlined
+                    v-model="email"
+                    :rules="emailRules"
+                    label="E-mail"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="password"
+                    :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="Password"
+                    hint="Almenos 8 caracteres son requeridos"
+                    counter
+                    outlined
+                    @click:append="show1 = !show1"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="4">
+                  <v-text-field
+                    v-model="passwordConfirm"
+                    :append-icon="show1 ? 'visibility' : 'visibility_off'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="Confirmar Password"
+                    hint="Almenos 8 caracteres son requeridos"
+                    counter
+                    outlined
+                    @click:append="show1 = !show1"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" md="2" lg="2">
+                  <v-btn @click="signUp" block outlined color="primary">Registrar</v-btn>
+                </v-col>
+              </v-row>
+            </v-col>
           </v-container>
         </v-form>
       </v-row>
@@ -146,6 +155,7 @@ export default {
                 semestre: this.semestre,
                 rol: "alumno",
                 activo: true,
+                imgProfile: "https://i.imgur.com/8BOkh8y.png",
                 qrcode: ""
               })
               .then(res => {

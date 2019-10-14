@@ -80,23 +80,21 @@ export default {
   methods: {
     signIn: function() {
       if (this.password && this.email) {
-        try {
-          firebase
-            .auth()
-            .signInWithEmailAndPassword(this.email, this.password)
-            .then(user => {
-              this.$router.push({
-                name: "user",
-                params: { id: this.email.split("@")[0], user: user }
-              });
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(user => {
+            this.$router.push({
+              name: "user",
+              params: { id: this.email.split("@")[0], user: user }
             });
-        } catch (e) {
-        } finally {
-          this.verificaDatos = !this.verificaDatos;
-          setTimeout(() => {
+          })
+          .catch(e => {
             this.verificaDatos = !this.verificaDatos;
-          }, 3000);
-        }
+            setTimeout(() => {
+              this.verificaDatos = !this.verificaDatos;
+            }, 3000);
+          });
       } else {
         this.verificaDatos = !this.verificaDatos;
         setTimeout(() => {

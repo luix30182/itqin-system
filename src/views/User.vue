@@ -8,7 +8,7 @@
             <v-card-title>{{nombre}} {{apellidoP}} {{apellidoM}}</v-card-title>
             <v-row align="center" justify="center">
               <v-col cols="12" md="6">
-                <v-img src="https://i.imgur.com/8BDZEtn.jpg" aspect-ratio="1"></v-img>
+                <v-img src="https://i.imgur.com/8BOkh8y.png" aspect-ratio="1"></v-img>
               </v-col>
               <v-col cols="12" md="6">
                 <h3>{{carrera}}</h3>
@@ -61,7 +61,6 @@ export default {
   },
   beforeMount() {
     const uid = this.user.user.uid;
-    console.log(uid);
     db.collection("users")
       .doc(uid)
       .get()
