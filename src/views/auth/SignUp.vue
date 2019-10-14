@@ -3,7 +3,7 @@
     <NavBar />
     <v-container>
       <v-row wrap>
-        <v-alert v-if="registroCorrecto" type="success">Uusario creado exitosamente</v-alert>
+        <v-alert v-if="registroCorrecto" type="success">Usario creado exitosamente</v-alert>
         <v-alert v-if="verificaDatos" type="warning">uh Verifica tus datos</v-alert>
         <v-card-title>Ingresa tus datos</v-card-title>
         <v-form ref="form">
@@ -16,7 +16,7 @@
                 <v-text-field v-model="apellidoP" label="Apellido Paterno" outlined></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="4">
-                <v-text-field v-model="apellidoM" label="Apellid Materno" outlined></v-text-field>
+                <v-text-field v-model="apellidoM" label="Apellido Materno" outlined></v-text-field>
               </v-col>
               <v-col cols="12" sm="4">
                 <v-text-field v-model="ncontrol" label="Número de control" outlined></v-text-field>
@@ -111,7 +111,7 @@ export default {
         "Ing. Industrial",
         "Ing. Logistica",
         "Ing. Gestion empresarial",
-        "Arquitectura"
+        "Lic. Arquitectura"
       ],
       semestres: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       registroCorrecto: false,
