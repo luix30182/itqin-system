@@ -81,7 +81,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col cols="12" md="6" offset-md="3">
+        <v-col cols="12" md="8" offset-md="2">
           <v-expansion-panels>
             <v-expansion-panel v-for="(student, i) in filteredStundents" :key="i">
               <v-expansion-panel-header
@@ -114,7 +114,7 @@
                       max-height="100"
                     ></v-img>
                   </v-col>
-                  <v-col>
+                  <v-col cols="12" md="3">
                     <v-btn
                       @click="desactivarAccess(student.ncontrol)"
                       block
@@ -272,9 +272,7 @@ export default {
           cust.nombre.toLowerCase().indexOf(self.filtro.toLowerCase()) >= 0 ||
           cust.apellidoP.toLowerCase().indexOf(self.filtro.toLowerCase()) >=
             0 ||
-          cust.apellidoM.toLowerCase().indexOf(self.filtro.toLowerCase()) >=
-            0 ||
-          cust.ncontrol.indexOf(self.filtro) >= 0
+          cust.apellidoM.toLowerCase().indexOf(self.filtro.toLowerCase()) >= 0
         );
       });
     }

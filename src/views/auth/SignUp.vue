@@ -5,7 +5,7 @@
       <v-row wrap>
         <v-form ref="form">
           <v-container>
-            <v-col cols="12" md="6" offset-md="3">
+            <v-col cols="12" md="7" offset-md="2">
               <v-card-title>Ingresa tus datos</v-card-title>
 
               <v-alert v-if="registroCorrecto" type="success">Usario creado exitosamente</v-alert>
