@@ -1,9 +1,22 @@
 <template>
   <div>
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-divider></v-divider>
+      <SignedInLinksMobile v-bind:user="user" v-if="user !== null" />
+      <SignedOutLinksMobile v-if="user === null" />
+    </v-navigation-drawer>
     <v-toolbar>
+      <v-app-bar-nav-icon class="d-sm-none .d-md-flex" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Sistema de ingreso al ITQ</v-toolbar-title>
+      <v-img
+        :src="require('../../assets/applogo.png')"
+        aspect-ratio="1"
+        max-width="60"
+        max-height="60"
+      ></v-img>
       <div class="flex-grow-1"></div>
-      <v-toolbar-items>
+      <v-toolbar-items class="d-none d-lg-block">
         <SignedInLinks v-bind:user="user" v-if="user !== null" />
         <SignedOutLinks v-if="user === null" />
       </v-toolbar-items>
@@ -15,10 +28,19 @@
 <script>
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
+import SignedInLinksMobile from "./SignedInLinksMobile";
+import SignedOutLinksMobile from "./SignedOutLinksMobile";
 export default {
+  data() {
+    return {
+      drawer: null
+    };
+  },
   components: {
     SignedInLinks,
-    SignedOutLinks
+    SignedOutLinks,
+    SignedInLinksMobile,
+    SignedOutLinksMobile
   },
   props: {
     user: null

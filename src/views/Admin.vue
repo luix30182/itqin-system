@@ -200,6 +200,7 @@ export default {
     },
     toBaseEncode: function(s, status) {
       const b = new Buffer(`${s};${status}`);
+      console.log(b.toString("base64"))
       let imageCode = null;
       QRCode.toDataURL(
         b.toString("base64"),
@@ -226,7 +227,7 @@ export default {
               const alumnoRef = db.collection("users").doc(doc.id);
               alumnoRef.update({
                 activo: true,
-                qrcode: imageCode
+                //qrcode: imageCode
               });
             }
           });
