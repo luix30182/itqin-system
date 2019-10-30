@@ -88,7 +88,6 @@
                 class="title"
               >{{student.nombre}} {{student.apellidoP}} {{student.apellidoM}}</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <v-card-title>{{nombre}} {{apellidoP}} {{apellidoM}}</v-card-title>
                 <v-row align="center" justify="center">
                   <v-col cols="12" md="5">
                     <h3>{{student.carrera}}</h3>
@@ -99,16 +98,11 @@
                     <h5>Qr de acceso</h5>
                   </v-col>
                   <v-col cols="12" md="2" class="d-flex justify-center">
-                    <v-img
-                      :src="getImage(student.qrcode)"
-                      aspect-ratio="1"
-                      max-width="500"
-                      max-height="500"
-                    ></v-img>
+                    <v-img :src="student.qrcode" aspect-ratio="1" max-width="500" max-height="500"></v-img>
                   </v-col>
                   <v-col cols="12" md="2" class="d-flex justify-center">
                     <v-img
-                      src="https://i.imgur.com/8BDZEtn.jpg"
+                      :src="student.imgProfile"
                       aspect-ratio="1"
                       max-width="300"
                       max-height="300"
@@ -189,18 +183,12 @@ export default {
           });
         });
     },
-    getImage: function(student) {
-      let image = new Image();
-      image.src = student;
-      return image;
-    },
     formatDate: function(f) {
       //1566190800
       return moment.unix(f).format("MMM Do YY");
     },
     toBaseEncode: function(s, status) {
       const b = new Buffer(`${s};${status}`);
-      console.log(b.toString("base64"))
       let imageCode = null;
       QRCode.toDataURL(
         b.toString("base64"),
@@ -223,10 +211,9 @@ export default {
           snapshot.forEach(doc => {
             if (doc.data().rol != "admin") {
               const imageCode = this.toBaseEncode(doc.data().ncontrol, "true");
-              console.log(imageCode);
               const alumnoRef = db.collection("users").doc(doc.id);
               alumnoRef.update({
-                activo: true,
+                activo: true
                 //qrcode: imageCode
               });
             }
