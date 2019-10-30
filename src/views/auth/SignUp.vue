@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <NavBar />
+    <NavBar v-bind:user="userLinks" />
     <v-container>
       <v-row wrap>
         <v-form ref="form">
@@ -124,7 +124,8 @@ export default {
       ],
       semestres: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       registroCorrecto: false,
-      verificaDatos: false
+      verificaDatos: false,
+      userLinks: null
     };
   },
   methods: {

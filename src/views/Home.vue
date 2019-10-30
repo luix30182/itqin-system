@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <NavBar />
+    <NavBar v-bind:user="userLinks" />
 
     <v-container class="d-flex flex-column justify-center ma-auto">
       <v-row>
@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      nombre: "Mario"
+      userLinks: null
     };
   }
 };

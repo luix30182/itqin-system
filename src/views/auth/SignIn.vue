@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <NavBar />
+    <NavBar v-bind:user="userLinks" />
     <v-container class="formHolder">
       <v-row wrap>
         <v-card class="ma-auto pa-6">
@@ -54,6 +54,7 @@
 <script>
 import firebase from "firebase/app";
 import "firebase/auth";
+import db from "../../firebaseInit";
 import NavBar from "../../components/layout/NavBar";
 
 export default {
@@ -74,7 +75,8 @@ export default {
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
       ],
-      verificaDatos: false
+      verificaDatos: false,
+      userLinks: null
     };
   },
   methods: {
@@ -84,10 +86,58 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(user => {
-            this.$router.push({
-              name: "user",
-              params: { id: this.email.split("@")[0], user: user }
-            });
+            this.userLinks = user.user;
+            db.collection("users")
+              .doc(user.user.uid)
+              .get()
+              .then(doc => {
+                if (!doc.exists) {
+                  console.log("No user foud");
+                  this.$router.push({
+                    name: "home"
+                  });
+                } else {
+                  if (doc.data().rol === "alumno") {
+                    const userData = {
+                      nombre: doc.data().nombre,
+                      apellidoP: doc.data().apellidoP,
+                      apellidoM: doc.data().apellidoM,
+                      ncontrol: doc.data().ncontrol,
+                      email: doc.data().email,
+                      carrera: doc.data().carrera,
+                      semestre: doc.data().semestre,
+                      qrcode: doc.data().qrcode
+                    };
+
+                    this.$router.push({
+                      name: "user",
+                      params: {
+                        id: this.email.split("@")[0],
+                        user: userData,
+                        userLinks: this.userLinks
+                      }
+                    });
+                  } else {
+                    const userData = {
+                      nombre: doc.data().nombre,
+                      apellidoP: doc.data().apellidoP,
+                      apellidoM: doc.data().apellidoM,
+                      email: doc.data().email
+                    };
+                    this.$router.push({
+                      name: "admin",
+                      params: {
+                        id: this.email.split("@")[0],
+                        user: userData,
+                        userLinks: this.userLinks
+                      }
+                    });
+                  }
+                }
+              })
+              .catch(err => {
+                console.log(err);
+              });
           })
           .catch(e => {
             this.verificaDatos = !this.verificaDatos;

@@ -4,10 +4,24 @@
       <v-toolbar-title>Sistema de ingreso al ITQ</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-toolbar-items>
-        <v-btn text to="/iniciar">Iniciar sesión</v-btn>
-        <v-btn text to="/registro">Registrarse</v-btn>
-        <v-btn text>Cerrar sesión</v-btn>
+        <SignedInLinks v-bind:user="user" v-if="user !== null" />
+        <SignedOutLinks v-if="user === null" />
       </v-toolbar-items>
     </v-toolbar>
   </div>
 </template>
+
+
+<script>
+import SignedInLinks from "./SignedInLinks";
+import SignedOutLinks from "./SignedOutLinks";
+export default {
+  components: {
+    SignedInLinks,
+    SignedOutLinks
+  },
+  props: {
+    user: null
+  }
+};
+</script>
