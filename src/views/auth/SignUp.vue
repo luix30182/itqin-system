@@ -157,7 +157,7 @@ export default {
                 rol: "alumno",
                 activo: true,
                 imgProfile: "https://i.imgur.com/8BOkh8y.png",
-                qrcode: ""
+                qrcode: "https://imgur.com/BZZ7i9Y"
               })
               .then(res => {
                 this.$refs.form.reset();

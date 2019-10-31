@@ -84,9 +84,11 @@
         <v-col cols="12" md="8" offset-md="2">
           <v-expansion-panels>
             <v-expansion-panel v-for="(student, i) in filteredStundents" :key="i">
-              <v-expansion-panel-header
-                class="title"
-              >{{student.nombre}} {{student.apellidoP}} {{student.apellidoM}}</v-expansion-panel-header>
+              <v-expansion-panel-header class="title">
+                <p
+                  :class="[student.activo ? 'green--text' : '', 'red--text']"
+                >{{student.nombre}} {{student.apellidoP}} {{student.apellidoM}}</p>
+              </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-row align="center" justify="center">
                   <v-col cols="12" md="5">
@@ -112,13 +114,13 @@
                     <v-btn
                       @click="desactivarAccess(student.ncontrol)"
                       block
-                      color="warning"
+                      color="red"
                       dark
                     >Remover Acceso</v-btn>
                     <v-btn
                       @click="activarAccess(student.ncontrol)"
                       block
-                      color="warning"
+                      color="cyan"
                       dark
                       class="mt-4"
                     >Habilitar Acceso</v-btn>
@@ -213,8 +215,8 @@ export default {
               const imageCode = this.toBaseEncode(doc.data().ncontrol, "true");
               const alumnoRef = db.collection("users").doc(doc.id);
               alumnoRef.update({
-                activo: true
-                //qrcode: imageCode
+                activo: true,
+                qrcode: imageCode
               });
             }
           });
