@@ -1,13 +1,16 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" absolute temporary>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-divider></v-divider>
+    <v-navigation-drawer class="blue-grey darken-4 white--text" v-model="drawer" absolute temporary>
+      <div class="d-flex justify-end ma-2 pa-1">
+        <v-btn class x-small fab color="white" @click.stop="drawer = !drawer">
+          <v-icon>close</v-icon>
+        </v-btn>
+      </div>
       <SignedInLinksMobile v-bind:user="user" v-if="user !== null" />
       <SignedOutLinksMobile v-if="user === null" />
     </v-navigation-drawer>
     <v-toolbar class="blue-grey darken-4">
-      <v-app-bar-nav-icon class="d-sm-none .d-md-flex" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon class="d-sm-none .d-md-flex white--text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-img
         :src="require('../../assets/applogo.png')"
         aspect-ratio="1"

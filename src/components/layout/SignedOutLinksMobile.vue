@@ -1,19 +1,19 @@
 <template>
   <v-list dense>
-    <v-list-item link to="/iniciar">
+    <v-list-item active-class="orange accent-3" link to="/iniciar">
       <v-list-item-icon>
-        <v-icon large>person</v-icon>
+        <v-icon class="white--text" large>person</v-icon>
       </v-list-item-icon>
       <v-list-item-content>
-        <v-list-item-title>Iniciar sesión</v-list-item-title>
+        <v-list-item-title class="white--text">Iniciar sesión</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
-    <v-list-item link to="/registro">
+    <v-list-item active-class="orange accent-3" link to="/registro">
       <v-list-item-icon>
-        <v-icon large>person_add</v-icon>
+        <v-icon class="white--text" large>person_add</v-icon>
       </v-list-item-icon>
       <v-list-item-content>
-        <v-list-item-title>Registrarse</v-list-item-title>
+        <v-list-item-title class="white--text">Registrarse</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
   </v-list>
