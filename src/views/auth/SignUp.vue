@@ -155,9 +155,9 @@ export default {
                 carrera: this.carrera,
                 semestre: this.semestre,
                 rol: "alumno",
-                activo: true,
+                activo: false,
                 imgProfile: "https://i.imgur.com/8BOkh8y.png",
-                qrcode: "https://imgur.com/BZZ7i9Y"
+                qrcode: "https://i.imgur.com/BZZ7i9Y.png"
               })
               .then(res => {
                 this.$refs.form.reset();

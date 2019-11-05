@@ -106,7 +106,8 @@ export default {
                       email: doc.data().email,
                       carrera: doc.data().carrera,
                       semestre: doc.data().semestre,
-                      qrcode: doc.data().qrcode
+                      qrcode: doc.data().qrcode,
+                      imgProfile: doc.data().imgProfile
                     };
 
                     this.$router.push({

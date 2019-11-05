@@ -11,10 +11,10 @@
               <v-col cols="12" md="6" align-self="center" justify-self="center">
                 <v-img
                   class="text-center ma-auto"
-                  height="300"
+                  height="200"
                   position="center"
-                  width="300"
-                  src="https://i.imgur.com/8BOkh8y.png"
+                  width="200"
+                  :src="imgProfile"
                   aspect-ratio="1"
                 ></v-img>
               </v-col>
@@ -63,11 +63,11 @@ export default {
       apellidoP: null,
       apellidoM: null,
       ncontrol: null,
-      password: null,
       email: null,
       carrera: null,
       semestre: null,
-      qrcode: null
+      qrcode: null,
+      imgProfile: null
     };
   },
   props: {
@@ -90,6 +90,7 @@ export default {
       this.carrera = this.user.carrera;
       this.semestre = this.user.semestre;
       this.qrcode = this.user.qrcode;
+      this.imgProfile = this.user.imgProfile;
     }
   }
 };

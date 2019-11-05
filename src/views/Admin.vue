@@ -91,7 +91,7 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-row align="center" justify="center">
-                  <v-col cols="12" md="5">
+                  <v-col cols="12" md="3">
                     <h3>{{student.carrera}}</h3>
                     <h5>{{student.semestre}}° semestre</h5>
                     <h5>Número de control: {{student.ncontrol}}</h5>
@@ -106,11 +106,11 @@
                     <v-img
                       :src="student.imgProfile"
                       aspect-ratio="1"
-                      max-width="300"
-                      max-height="300"
+                      max-width="200"
+                      max-height="200"
                     ></v-img>
                   </v-col>
-                  <v-col cols="12" md="3">
+                  <v-col cols="12" md="2">
                     <v-btn
                       @click="desactivarAccess(student.ncontrol)"
                       block
@@ -120,7 +120,7 @@
                     <v-btn
                       @click="activarAccess(student.ncontrol)"
                       block
-                      color="cyan"
+                      color="success"
                       dark
                       class="mt-4"
                     >Habilitar Acceso</v-btn>
