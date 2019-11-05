@@ -9,7 +9,7 @@
               <v-card-title>Ingresa tus datos</v-card-title>
 
               <v-alert v-if="registroCorrecto" type="success">Usario creado exitosamente</v-alert>
-              <v-alert v-if="verificaDatos" type="warning">uh Verifica tus datos</v-alert>
+              <v-alert v-if="verificaDatos" type="warning">Verifica tus datos</v-alert>
               <v-row wrap justify="end">
                 <v-col cols="12" sm="12" md="4">
                   <v-text-field v-model="nombre" label="Nombre(s)" outlined></v-text-field>

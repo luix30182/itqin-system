@@ -4,7 +4,7 @@
     <v-container class="formHolder">
       <v-row wrap>
         <v-card class="ma-auto pa-6">
-          <v-alert v-if="verificaDatos" type="warning">uh Verifica tus datos</v-alert>
+          <v-alert v-if="verificaDatos" type="warning">Verifica tus datos</v-alert>
           <v-card-title>Ingresa tus datos</v-card-title>
           <v-form>
             <v-container>

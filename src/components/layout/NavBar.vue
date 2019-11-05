@@ -6,15 +6,15 @@
       <SignedInLinksMobile v-bind:user="user" v-if="user !== null" />
       <SignedOutLinksMobile v-if="user === null" />
     </v-navigation-drawer>
-    <v-toolbar>
+    <v-toolbar class="blue-grey lighten-3">
       <v-app-bar-nav-icon class="d-sm-none .d-md-flex" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Sistema de ingreso al ITQ</v-toolbar-title>
       <v-img
         :src="require('../../assets/applogo.png')"
         aspect-ratio="1"
         max-width="60"
         max-height="60"
       ></v-img>
+      <v-toolbar-title>Sistema de ingreso al ITQ</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-toolbar-items class="d-none d-lg-block">
         <SignedInLinks v-bind:user="user" v-if="user !== null" />
