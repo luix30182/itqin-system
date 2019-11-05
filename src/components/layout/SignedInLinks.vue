@@ -1,5 +1,5 @@
 <template>
-  <v-btn @click="signOutUser" text>Cerrar sesión</v-btn>
+  <v-btn @click="signOutUser" text class="white--text">Cerrar sesión</v-btn>
 </template>
 
 <script>

@@ -6,8 +6,8 @@
         <v-img
           :src="require('../assets/applogo.png')"
           aspect-ratio="1"
-          max-width="500"
-          max-height="500"
+          max-width="400"
+          max-height="400"
         ></v-img>
       </v-row>
       <v-row>
