@@ -10,7 +10,7 @@
           <v-form>
             <v-row>
               <v-col cols="12">
-                <v-text-field v-model="filtro" label="Filtrar alumno (nombre o número de control)"></v-text-field>
+                <v-text-field v-model="filtro" label="Filtrar alumno (nombre)"></v-text-field>
               </v-col>
               <!-- <v-col cols="12">
                 <v-card outlined class="pa-5">
