@@ -5,6 +5,7 @@ import SignIn from './views/auth/SignIn';
 import SignUp from './views/auth/SignUp';
 import User from './views/User';
 import Admin from './views/Admin';
+import Descargas from './views/Descargas';
 
 Vue.use(Router);
 
@@ -38,6 +39,11 @@ export default new Router({
 			name: 'admin',
 			component: Admin,
 			props: true
+		},
+		{
+			path: '/descargas',
+			name: 'descargas',
+			component: Descargas
 		}
 	]
 });

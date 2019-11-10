@@ -16,5 +16,13 @@
         <v-list-item-title class="white--text">Registrarse</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
+    <v-list-item active-class="orange accent-3" link to="/descargas">
+      <v-list-item-icon>
+        <v-icon class="white--text" large>cloud_download</v-icon>
+      </v-list-item-icon>
+      <v-list-item-content>
+        <v-list-item-title class="white--text">Descargas</v-list-item-title>
+      </v-list-item-content>
+    </v-list-item>
   </v-list>
 </template>
