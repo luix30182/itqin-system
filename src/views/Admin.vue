@@ -3,7 +3,7 @@
     <NavBar v-bind:user="userLinks" />
     <v-container class="grey lighten-5">
       <v-row wrap>
-        <v-col cols="12" md="7" offset-md="3">
+        <v-col cols="12" md="6" offset-md="3">
           <h1>Administrador: {{nombre}} {{apellidoP}} {{apellidoM}}</h1>
         </v-col>
         <v-col cols="12" md="6" offset-md="3">
@@ -12,26 +12,10 @@
               <v-col cols="12">
                 <v-text-field v-model="filtro" label="Filtrar alumno (nombre)"></v-text-field>
               </v-col>
-              <!-- <v-col cols="12">
-                <v-card outlined class="pa-5">
-                  <p>Filtrar por carrera o semestre</p>
-                  <v-row>
-                    <v-col cols="12" md="8" class="d-flex align-center">
-                      <v-select v-model="carrera" :items="carreras" label="Carrera" outlined></v-select>
-                    </v-col>
-                    <v-col cols="12" md="4" class="d-flex align-center">
-                      <v-select v-model="semestre" :items="semestres" label="semestre" outlined></v-select>
-                    </v-col>
-                    <v-col class="d-flex align-center">
-                      <v-btn class="ma-2" tile outlined color="orange accent-3">Aplicar filtro</v-btn>
-                    </v-col>
-                  </v-row>
-                </v-card>
-              </v-col>-->
             </v-row>
           </v-form>
         </v-col>
-        <v-col cols="12" md="6" offset-md="3">
+        <v-col cols="12" md="8" offset-md="2">
           <v-card>
             <v-card-title>Informacion del semestre</v-card-title>
             <v-card-text>
@@ -81,7 +65,7 @@
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col cols="12" md="8" offset-md="2">
+        <v-col cols="12" md="10" offset-md="1">
           <v-expansion-panels>
             <v-expansion-panel v-for="(student, i) in filteredStundents" :key="i">
               <v-expansion-panel-header class="title">
@@ -91,7 +75,7 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <v-row align="center" justify="center">
-                  <v-col cols="12" md="3">
+                  <v-col cols="12" md="4">
                     <h3>{{student.carrera}}</h3>
                     <h5>{{student.semestre}}° semestre</h5>
                     <h5>Número de control: {{student.ncontrol}}</h5>
@@ -110,7 +94,7 @@
                       max-height="200"
                     ></v-img>
                   </v-col>
-                  <v-col cols="12" md="2">
+                  <v-col cols="12" md="3">
                     <v-btn
                       @click="desactivarAccess(student.ncontrol)"
                       block
@@ -251,9 +235,11 @@ export default {
         .get()
         .then(snapshot => {
           snapshot.forEach(doc => {
+            const imageCode = this.toBaseEncode(doc.data().ncontrol, "true");
             const userRef = db.collection("users").doc(doc.id);
             userRef.update({
-              activo: true
+              activo: true,
+              qrcode: imageCode
             });
           });
         })
@@ -268,9 +254,11 @@ export default {
         .get()
         .then(snapshot => {
           snapshot.forEach(doc => {
+            const imageCode = this.toBaseEncode(doc.data().ncontrol, "false");
             const userRef = db.collection("users").doc(doc.id);
             userRef.update({
-              activo: false
+              activo: false,
+              qrcode: imageCode
             });
           });
         })
