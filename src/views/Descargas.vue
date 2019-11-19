@@ -7,6 +7,7 @@
           <h1 class="display-2 text-center">Descarga nuestras aplicaciones</h1>
         </v-col>
       </v-row>
+
       <v-row justify="center" mt-12>
         <v-col cols="12" md="3" align="center">
           <v-img
@@ -18,11 +19,15 @@
           ></v-img>
           <h1>ITQin</h1>
           <p>Esta es la aplicación que quieres descargar si eres alumno del ITQ</p>
-          <v-btn
-            href="https://drive.google.com/open?id=1eyXXC7X_5hsUKODDUYxENQqtvWut7_ib"
-            class="ma-2 white--text"
-            color="orange"
-          >Descargar</v-btn>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.sistemas.itqin&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+          >
+            <v-img
+              src="https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png"
+              max-width="300"
+              max-height="200"
+            ></v-img>
+          </a>
         </v-col>
         <v-col cols="12" md="3" align="center">
           <v-img
